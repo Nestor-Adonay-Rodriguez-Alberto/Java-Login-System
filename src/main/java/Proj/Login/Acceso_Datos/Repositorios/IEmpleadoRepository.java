@@ -1,0 +1,8 @@
+package Proj.Login.Acceso_Datos.Repositorios;
+
+import Proj.Login.Entidades.Empleado;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IEmpleadoRepository extends JpaRepository<Empleado,Integer>
+{
+}

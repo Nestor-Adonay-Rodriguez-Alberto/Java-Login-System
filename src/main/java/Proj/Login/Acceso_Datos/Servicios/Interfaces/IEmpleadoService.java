@@ -12,9 +12,10 @@ public interface IEmpleadoService
     // RECIBE UN OBJETO Y LO GUARDA EN DB:
     Empleado Crear_Editar(Empleado empleado);
 
-    // BUSCA EN DB UN OBJETO CON ESE ID:
+    // OBTIENE DE LA DB UN OBJETO CON ESE ID:
     Optional<Empleado> Buscar_PorID(Integer id);
 
     // BUSCA EN DB UN OBJETO CON ESE ID Y LO ELIMINA:
     void Eliminar_PorID(Integer id);
+
 }

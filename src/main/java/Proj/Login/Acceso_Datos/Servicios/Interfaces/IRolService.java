@@ -1,9 +1,8 @@
 package Proj.Login.Acceso_Datos.Servicios.Interfaces;
 
 import Proj.Login.Entidades.Rol;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
 
 public interface IRolService
 {
@@ -13,7 +12,7 @@ public interface IRolService
     // RECIBE UN OBJETO Y LO GUARDA EN DB:
     Rol Crear_Editar(Rol rol);
 
-    // BUSCA EN DB UN OBJETO CON ESE ID:
+    // OBTIENE DE LA DB UN OBJETO CON ESE ID:
     Optional<Rol> Buscar_PorID(Integer id);
 
     // BUSCA EN DB UN OBJETO CON ESE ID Y LO ELIMINA:

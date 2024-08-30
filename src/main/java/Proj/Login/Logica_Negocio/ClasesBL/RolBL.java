@@ -1,7 +1,6 @@
-package Proj.Login.Acceso_Datos.Servicios.Implementaciones;
+package Proj.Login.Logica_Negocio.ClasesBL;
 
-import Proj.Login.Acceso_Datos.Repositorios.IRolRepository;
-import Proj.Login.Acceso_Datos.Servicios.Interfaces.IRolService;
+import Proj.Login.Acceso_Datos.Servicios.Implementaciones.RolService;
 import Proj.Login.Entidades.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,39 +9,35 @@ import java.util.*;
 
 
 @Service
-public class RolService implements IRolService
+public class RolBL
 {
-    // Representa La DB:
+    // Puente Con La DB:
     @Autowired
-    private IRolRepository _IRolRepository;
+    private RolService _RolService;
 
 
     // TODOS LOS REGISTROS DE LA DB:
-    @Override
     public List<Rol> Obtener_Todos()
     {
-        return _IRolRepository.findAll();
+        return _RolService.Obtener_Todos();
     }
 
     // RECIBE UN OBJETO Y LO GUARDA EN DB:
-    @Override
     public Rol Crear_Editar(Rol rol)
     {
-        return _IRolRepository.save(rol);
+        return _RolService.Crear_Editar(rol);
     }
 
     // OBTIENE DE LA DB UN OBJETO CON ESE ID:
-    @Override
     public Optional<Rol> Buscar_PorID(Integer id)
     {
-        return _IRolRepository.findById(id);
+        return _RolService.Buscar_PorID(id);
     }
 
     // BUSCA EN DB UN OBJETO CON ESE ID Y LO ELIMINA:
-    @Override
     public void Eliminar_PorID(Integer id)
     {
-        _IRolRepository.deleteById(id);
+        _RolService.Eliminar_PorID(id);
     }
 
 }

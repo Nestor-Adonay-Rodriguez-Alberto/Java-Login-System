@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Ubicacion De Nuestro Layout -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Roles Registrados</title>
+    <style>
+
+        /* Estilos Del Cuadro */
+        .form-container {
+            max-width: 751px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        /* Estilos Para h1 */
+        .form-container h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .form-container .row {
+            margin-bottom: 10px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[${msg}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <!-- Mostrar mensaje de error en caso de error -->
+    <div th:if="${error != null}">
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: '[[${error}]]',
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <div class="form-container">
+        <h1>Roles Registrados</h1><br/>
+
+        <p>
+            <a th:href="@{/Rol/Vista_Registrar}" class="btn btn-dark">Nuevo Rol</a>
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item : ${Lista_Roles}">
+                    <td th:text="${item.Nombre}"></td>
+
+                    <!-- BOTONES -->
+                    <td>
+                        <div class="d-flex flex-wrap">
+                            <div class="btn-group">
+                                <a th:href="@{/Rol/Editar_Rol/{id}(id=${item.IdRol})}" class="btn btn-primary rounded">Editar</a>
+                                <a th:href="@{/Rol/Detalle_Rol/{id}(id=${item.IdRol})}" class="btn btn-secondary rounded">Detalles</a>
+                                <a th:href="@{/Rol/Vista_Eliminar/{id}(id=${item.IdRol})}" class="btn btn-danger rounded">Eliminar</a>
+                            </div>
+                            <style>
+                                .btn-group {
+                                    display: flex;
+                                    gap: 5px;
+                                }
+
+                                .btn {
+                                    flex: 1;
+                                    border-radius: 5px;
+                                }
+                            </style>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

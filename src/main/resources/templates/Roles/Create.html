@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Ubicacion De Nuestro Layout -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registrar Rol</title>
+
+    <style>
+
+        /* Estilos Del Cuadro */
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        /* Estilos Para h1 */
+        .form-container h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .form-container .row {
+            margin-bottom: 10px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
+<div layout:fragment="content">
+
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[${msg}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <div class="form-container">
+        <h1>Registro</h1><br />
+
+        <h5>Datos Del Rol</h5>
+        <hr />
+
+        <form th:action="@{/Rol/Registrar_Rol}" th:object="${rol}" class="row" method="post">
+
+            <!-- Mostrar mensajes de error de validación -->
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+
+            </div>
+
+            <!-- Fila #1 -->
+            <div class="row">
+                <div class="form-group col-md-6">
+                  <label class="control-label">Nombre<span style="color: red;">*</span></label>
+                  <input type="text" class="form-control" th:field="*{Nombre}" placeholder="Ingrese Un Nombre" required>
+                </div>
+            </div>
+
+            <!-- BOTONES -->
+            <div class="row">
+
+                <div class="form-group">
+                    <input type="submit" value="GUARDAR" class="btn btn-primary" />
+                    <a th:href="@{/Rol/Roles_Registrados}" class="btn btn-secondary">CANCELAR</a>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
+
 </html>

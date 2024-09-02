@@ -30,10 +30,9 @@ public class Empleado
     @Email(message = "El Email Debe Ser Válido")
     private String Email;
 
-
-    @NotBlank(message = "La Contraseña Es Requerida")
+    @NotBlank(message = "ES REQUERIDO")
     @Size(min = 5, message = "La Contraseña Debe Tener Al Menos 5 Caracteres")
-    private String Contraseña;
+    private String PASSWORD;
 
 
     @NotNull
@@ -46,6 +45,7 @@ public class Empleado
     @ManyToOne
     @JoinColumn(name = "IdRolEnEmpleado", nullable = false)
     private Rol Objeto_Rol;
+
 
 
 
@@ -78,11 +78,11 @@ public class Empleado
         Email = email;
     }
 
-    public @NotBlank(message = "La Contraseña Es Requerida") @Size(min = 5, message = "La Contraseña Debe Tener Al Menos 5 Caracteres") String getContraseña() {
-        return Contraseña;
+    public @NotBlank(message = "ES REQUERIDO") @Size(min = 5, message = "La Contraseña Debe Tener Al Menos 5 Caracteres") String getPASSWORD() {
+        return PASSWORD;
     }
-    public void setContraseña(@NotBlank(message = "La Contraseña Es Requerida") @Size(min = 5, message = "La Contraseña Debe Tener Al Menos 5 Caracteres") String contraseña) {
-        Contraseña = contraseña;
+    public void setPASSWORD(@NotBlank(message = "ES REQUERIDO") @Size(min = 5, message = "La Contraseña Debe Tener Al Menos 5 Caracteres") String password) {
+        this.PASSWORD = password;
     }
 
     public @NotNull Date getFecha_Contratado() {

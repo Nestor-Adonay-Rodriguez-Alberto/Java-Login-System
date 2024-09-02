@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- Ubicacion De Nuestro Layout -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Empleados Registrados</title>
+    <style>
+
+        /* Estilos Del Cuadro */
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        /* Estilos Para h1 */
+        .form-container h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .form-container .row {
+            margin-bottom: 10px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div layout:fragment="content">
+
+    <div class="form-container">
+        <h1>Empleados Registrados</h1><br/>
+
+        <p>
+            <a th:href="@{/Empleado/Vista_Registrar}" class="btn btn-dark">Nuevo Empleado</a>
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Fecha Contratado</th>
+                    <th>Sueldo</th>
+                    <th>Email</th>
+                    <th>Contraseña</th>
+                    <th>Rol</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="item : ${Lista_Empleados}">
+                    <td th:text="${item.Nombre}"></td>
+                    <td th:text="${item.Fecha_Contratado}"></td>
+                    <td th:text="${item.Sueldo}"></td>
+                    <td th:text="${item.Email}"></td>
+                    <td th:text="${item.Contraseña}"></td>
+                    <td th:text="${item.Objeto_Rol.Nombre}"></td>
+
+
+                    <!-- BOTONES -->
+                    <td>
+                        <div class="d-flex flex-wrap">
+                            <div class="btn-group">
+                                <a th:href="@{/Empleado/Editar_Empleado/{id}(id=${item.IdEmpleado})}" class="btn btn-primary rounded">Editar</a>
+                                <a th:href="@{/Empleado/Detalle_Empleado/{id}(id=${item.IdEmpleado})}" class="btn btn-secondary rounded">Detalles</a>
+                                <a th:href="@{/Empleado/Vista_Eliminar/{id}(id=${item.IdEmpleado})}" class="btn btn-danger rounded">Eliminar</a>
+                            </div>
+                            <style>
+                                .btn-group {
+                                    display: flex;
+                                    gap: 5px;
+                                }
+
+                                .btn {
+                                    flex: 1;
+                                    border-radius: 5px;
+                                }
+                            </style>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

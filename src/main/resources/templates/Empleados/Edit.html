@@ -1,10 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- Ubicacion De Nuestro Layout -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar Empleado</title>
+
+    <style>
+
+        /* Estilos Del Cuadro */
+        .form-container {
+            max-width: 700px;
+            padding: 20px;
+            background-color: #f7f7f7;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        /* Estilos Para h1 */
+        .form-container h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+        }
+
+        .form-container .row {
+            margin-bottom: 10px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
+<div layout:fragment="content">
+
+    <div class="form-container">
+        <h1>Editar</h1><br />
+
+        <h5>Datos Del Empleado</h5>
+        <hr />
+
+        <form th:action="@{/Empleado/Registrar_Empleado}" th:object="${Empleado_Obtenido}" class="row" method="post">
+            <input type="hidden" th:field="*{IdEmpleado}">
+
+            <!-- Mostrar mensajes de error de validación -->
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+
+            </div>
+
+            <!-- FILA #1 -->
+            <div class="row">
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">NOMBRE:<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" th:field="*{Nombre}" placeholder="Ingrese Un Nombre" required>
+                </div>
+
+                <div class="form-group col-md-5">
+                    <label class="control-label">FECHA CONTRATADO:<span style="color: red;">*</span></label>
+                    <input type="date" class="form-control" th:field="*{Fecha_Contratado}" placeholder="Ingrese Una Fecha" required>
+                </div>
+
+            </div>
+
+            <!-- FILA #2 -->
+            <div class="row">
+
+                <div class="form-group col-md-5">
+                    <label class="control-label">ROL:<span style="color: red;">*</span></label>
+                    <select class="form-control" th:field="*{Objeto_Rol.IdRol}" required>
+                        <option value="">Seleccione un rol</option>
+                        <th:block th:each="Rol : ${Lista_Roles}">
+                            <option th:value="${Rol.IdRol}" th:text="${Rol.Nombre}"></option>
+                        </th:block>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label class="control-label">SUELDO:<span style="color: red;">*</span></label>
+                    <input type="number" class="form-control" th:field="*{Sueldo}" placeholder="$:" step="0.01" required>
+                </div>
+
+            </div>
+
+            <!-- FILA #3 -->
+            <div class="row">
+
+                <div class="form-group col-md-6">
+                    <label class="control-label">EMAIL::<span style="color: red;">*</span></label>
+                    <input type="email" class="form-control" th:field="*{Email}" placeholder="ejemplo@gmail.com" required>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label">CONTRASEÑA:<span style="color: red;">*</span></label>
+                    <input type="password" class="form-control" th:field="*{PASSWORD}" placeholder="Contraseña Segura" required>
+                </div>
+
+
+            </div>
+
+
+
+            <!-- BOTONES -->
+            <div class="row">
+
+                <div class="form-group">
+                    <input type="submit" value="GUARDAR" class="btn btn-primary" />
+                    <a th:href="@{/Empleado/Empleados_Registrados}" class="btn btn-secondary">CANCELAR</a>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
 </body>
+
 </html>

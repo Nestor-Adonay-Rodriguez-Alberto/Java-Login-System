@@ -11,7 +11,7 @@
 
         /* Estilos Del Cuadro */
         .form-container {
-            max-width: 600px;
+            max-width: 750px;
             padding: 20px;
             background-color: #f7f7f7;
             border-radius: 20px;
@@ -44,6 +44,17 @@
 <body>
 <div layout:fragment="content">
 
+    <!-- Mostrar mensaje de confirmación en caso de éxito -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[${msg}]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
     <div class="form-container">
         <h1>Empleados Registrados</h1><br/>
 
@@ -67,7 +78,7 @@
                 <tbody>
                 <tr th:each="item : ${Lista_Empleados}">
                     <td th:text="${item.Nombre}"></td>
-                    <td th:text="${item.Fecha_Contratado}"></td>
+                    <td th:text="${#dates.format(item.Fecha_Contratado, 'dd-MM-yyyy')}"></td>
                     <td th:text="${item.Sueldo}"></td>
                     <td th:text="${item.Email}"></td>
                     <td th:text="${item.PASSWORD}"></td>

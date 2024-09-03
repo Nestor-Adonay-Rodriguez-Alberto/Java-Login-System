@@ -45,17 +45,6 @@
 
 <div layout:fragment="content">
 
-    <!-- Mostrar mensaje de confirmación en caso de éxito -->
-    <div th:if="${msg != null}">
-        <script>
-            Swal.fire({
-                title: "Confirmación",
-                text: '[[${msg}]]',
-                icon: "success"
-            });
-        </script>
-    </div>
-
     <div class="form-container">
         <h1>Registro</h1><br />
 
